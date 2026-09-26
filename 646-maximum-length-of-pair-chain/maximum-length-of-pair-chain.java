@@ -19,14 +19,25 @@ class Solution {
         if(dp[i][0] != -1){
             return dp[i][0];
         }
-       int id = pairs.length;
-        for(int j= i+1; j< pairs.length; j++){
-            if(pairs[i][1] < pairs[j][0]){
-                id= j;
-                break;
-            }   
+        int id = pairs.length;
+    //     for(int j= i+1; j< pairs.length; j++){
+    //         if(pairs[i][1] < pairs[j][0]){
+    //             id= j;
+    //             break;
+    //         }   
 
+    //     }
+    int low = i+1;
+    int high = pairs.length -1;
+    while(low <= high){
+        int mid = (low + high) / 2;
+        if(pairs[mid][0] > pairs[i][1]){
+            id= mid;
+            high = mid -1;
+        }else{
+            low = mid +1;
         }
+    }
         int take =1;
         if(id < pairs.length){
             take = 1 + func(pairs, id,dp);
