@@ -1,10 +1,14 @@
+import java.util.*;
 class Solution {
-    public int hIndex(int[] citations){
+    public int hIndex(int[] citations) {
         Arrays.sort(citations);
-        int n = citations.length;
-        for (int i = 0; i < n; i++){
+        return func(citations);
+    }
+    public int func(int[] c) {
+        int n = c.length;
+        for (int i = 0; i < n; i++) {
             int h = n - i;
-            if (citations[i] >= h){
+            if (c[i] >= h) {
                 return h;
             }
         }
