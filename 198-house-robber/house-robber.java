@@ -1,20 +1,13 @@
 class Solution {
-    Integer[] dp;
-    public int rob(int[] nums) {
-        dp = new Integer[nums.length];
-        return func(nums, 0);
-    }
-    public int func(int[] nums, int index) {
-        if (index >= nums.length) {
-            return 0;
+    public int rob(int[] nums){
+        int n = nums.length;
+        if(n == 1) return nums[0];
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0],nums[1]);
+        for (int i = 2; i < n; i++) {
+            dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
         }
-        if (dp[index] != null) {
-            return dp[index];
-        }
-        int even = nums[index] + func(nums, index + 2);
-        int odd = func(nums, index + 1);
-        int ans = Math.max(even, odd);
-        dp[index] = ans;
-        return ans;
+        return dp[n - 1];
     }
 }
